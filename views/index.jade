@@ -9,7 +9,6 @@ block content
 		each wish in feed
 			li= wish.text
 			div(id= wish.id, class="upvote") ^ #{wish.upvotes}
-			div(id= wish.id, class="unvote") unvote
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 	script(type="text/javascript", src="../javascripts/index.js")
 

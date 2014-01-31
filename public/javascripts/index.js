@@ -3,18 +3,20 @@
 // });
 
 $(".upvote").click(function () {
-	$.getJSON("http://localhost:3000/upvote/" + $(this).attr("id"), function (data) {
-		console.log(data);
-		if (data.success) {
-			$("#" + data.wish._id + ".upvote").text("^ " + data.wish.upvotes);
-		}
-	});
-});
-
-$(".unvote").click(function () {
-	$.getJSON("http://localhost:3000/unvote/" + $(this).attr("id"), function (data) {
-		if (data.success) {
-			$("#" + data.wish._id + ".upvote").text("^ " + data.wish.upvotes);
-		}
-	});
+	var div = $("#" + $(this).attr("id"));
+	if (div.attr("class") == "upvote") {
+		$.getJSON("http://localhost:3000/upvote/" + $(this).attr("id"), function (data) {
+			if (data.success) {
+				div.attr("class", "unvote");
+				div.text("v " + data.wish.upvotes);
+			}
+		});
+	} else {
+		$.getJSON("http://localhost:3000/unvote/" + $(this).attr("id"), function (data) {
+			if (data.success) {
+				div.attr("class", "upvote");
+				div.text("^ " + data.wish.upvotes);
+			}
+		});
+	}
 });

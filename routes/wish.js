@@ -16,53 +16,43 @@ exports.create = function (req, res) {
 
 exports.upvote = function (req, res) {
 	var wish_id = req.param("id");
-	if (check_voted(wish_id, req)) {
-		app.WishModel.findOne({_id: wish_id}, function (err, found_wish) {
-			if (err) {
-				console.log(err);
-			} else {
-				found_wish.upvotes++;
-				found_wish.save(function (err, found_wish) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.send({success: true, wish: found_wish});
-					}
-				});
-			}
-		});
-	} else {
-		res.send({success: false});
-	}
+	app.WishModel.findOne({_id: wish_id}, function (err, found_wish) {
+		if (err) {
+			console.log(err);
+		} else {
+			found_wish.upvotes++;
+			found_wish.save(function (err, found_wish) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.send({success: true, wish: found_wish});
+				}
+			});
+		}
+	});
 };
 
 exports.unvote = function (req, res) {
 	var wish_id = req.param("id");
-	if (!check_voted(wish_id, req)) {
-		var index = req.session.voted.indexOf(wish_id);
-		req.session.voted.splice(index, 1); //Remove the wish
-		
-		app.WishModel.findById(wish_id, function (err, found_wish) {
-			if (err) {
-				console.log(err);
-			} else {
-				found_wish.upvotes--;
-				found_wish.save(function (err, found_wish) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.send({success: true, wish: found_wish});
-					}
-				});
-			}
-		});
-	} else {
-		res.send({success: false});
-	}
+	app.WishModel.findById(wish_id, function (err, found_wish) {
+		if (err) {
+			console.log(err);
+		} else {
+			found_wish.upvotes--;
+			found_wish.save(function (err, found_wish) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.send({success: true, wish: found_wish});
+				}
+			});
+		}
+	}); 
 };
 
+
 /* Returns true if the session hasn't already voted on this wish, 
-	 false if they already have */
+false if they already have */
 
 function check_voted (wish_id, req) {
 	if (!req.session.voted) {
