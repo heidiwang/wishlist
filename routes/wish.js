@@ -16,7 +16,7 @@ exports.create = function (req, res) {
 
 exports.upvote = function (req, res) {
 	var wish_id = req.param("id");
-	app.WishModel.findOne({_id: wish_id}, function (err, found_wish) {
+	app.WishModel.findById(wish_id, function (err, found_wish) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -25,6 +25,7 @@ exports.upvote = function (req, res) {
 				if (err) {
 					console.log(err);
 				} else {
+					add_voted (wish_id, req);
 					res.send({success: true, wish: found_wish});
 				}
 			});
@@ -43,6 +44,7 @@ exports.unvote = function (req, res) {
 				if (err) {
 					console.log(err);
 				} else {
+					remove_voted (wish_id, req);
 					res.send({success: true, wish: found_wish});
 				}
 			});
@@ -50,22 +52,37 @@ exports.unvote = function (req, res) {
 	}); 
 };
 
+function add_voted (wish_id, req) {
+	if (!req.session.voted) {
+		req.session.voted = [];
+	} 
+	req.session.voted.push (wish_id);
+	console.log("add_voted: " + req.session.voted);
+};
+
+function remove_voted (wish_id, req) {
+	var index = req.session.voted.indexOf (wish_id);
+	req.session.voted.splice (index, 1);
+	console.log("remove_voted: " + req.session.voted);
+};
 
 /* Returns true if the session hasn't already voted on this wish, 
 false if they already have */
 
-function check_voted (wish_id, req) {
+function has_voted (wish_id, req) {
+	console.log("has_voted: wish_id = " + wish_id + " voted" + req.session.voted);
 	if (!req.session.voted) {
 		/* Hasn't voted on anything yet */
-		req.session.voted = [];
-		req.session.voted.push(wish_id);
-		return true;
-	} else if (req.session.voted.indexOf(wish_id) == -1) {
-		/* Hasn't voted on this wish yet */
-		req.session.voted.push(wish_id);
-		return true;
-	} else {
-		/* Already voted on this wish */
 		return false;
+	} else if (req.session.voted.indexOf(wish_id) == -1) {
+		console.log("2");
+		/* Hasn't voted on this wish yet */
+		return false;
+	} else {
+		console.log("3");
+		/* Already voted on this wish */
+		return true;
 	}
-}
+};
+
+exports.has_voted = has_voted;
