@@ -1,9 +1,17 @@
 var app = require("../app");
 
+var second_start = new Date(2005, 11, 8, 7, 46, 43, 0).getTime();
+var DECAY_FACTOR = 45000;
+
+var timer = setInterval(function () {update_score_all()}, 1000);
+
 exports.create = function (req, res) {
 	var wish_text = req.param("wish");
+
+	var time = new Date().getTime();
+	var score = (time - second_start) / DECAY_FACTOR;
 	
-	var new_wish = new app.WishModel({text: wish_text, upvotes: 0});
+	var new_wish = new app.WishModel({text: wish_text, upvotes: 0, second_created: time, score: score});
 	new_wish.save(function (err, new_wish) {
 		if (err) {
 			console.log(err);
@@ -11,6 +19,7 @@ exports.create = function (req, res) {
 		}
 	});
 
+	console.log(new_wish);
 	res.redirect("/");
 };
 
@@ -21,11 +30,13 @@ exports.upvote = function (req, res) {
 			console.log(err);
 		} else {
 			found_wish.upvotes++;
+			update_score(found_wish);
 			found_wish.save(function (err, found_wish) {
 				if (err) {
 					console.log(err);
 				} else {
 					add_voted (wish_id, req);
+					console.log(found_wish);
 					res.send({success: true, wish: found_wish});
 				}
 			});
@@ -40,17 +51,31 @@ exports.unvote = function (req, res) {
 			console.log(err);
 		} else {
 			found_wish.upvotes--;
+			update_score(found_wish);
 			found_wish.save(function (err, found_wish) {
 				if (err) {
 					console.log(err);
 				} else {
 					remove_voted (wish_id, req);
+					console.log(found_wish);
 					res.send({success: true, wish: found_wish});
 				}
 			});
 		}
 	}); 
 };
+
+function update_score_all () {
+	var wishes = app.WishModel.find();
+	for (var i = 0; i < wishes.length; i++) {
+		update_score(wishes[i]);
+	}
+};
+
+function update_score (wish) {
+	wish.score = Math.log(wish.upvotes + 1) + (wish.second_created - second_start) / DECAY_FACTOR;
+};
+
 
 function add_voted (wish_id, req) {
 	if (!req.session.voted) {
@@ -70,7 +95,6 @@ function remove_voted (wish_id, req) {
 false if they already have */
 
 function has_voted (wish_id, req) {
-	console.log("has_voted: wish_id = " + wish_id + " voted" + req.session.voted);
 	if (!req.session.voted) {
 		/* Hasn't voted on anything yet */
 		return false;

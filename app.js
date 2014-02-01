@@ -58,7 +58,9 @@ function define_schemas () {
 
 	var wish_schema = Schema({
 		text: String,
-		upvotes: Number
+		upvotes: Number,
+		second_created: Number,
+		score: Number
 	});
 
 	var Wish = mongoose.model("Wish", wish_schema);
