@@ -65,6 +65,21 @@ exports.unvote = function (req, res) {
 	}); 
 };
 
+exports.search = function (req, res) {
+	var query = req.param("query");
+	console.log(query);
+	app.WishModel.find(function (err, wishes) {
+		var result = [];
+		for (var i = 0; i < wishes.length; i++) {
+			console.log(wishes[i].text);
+			if (wishes[i].text.indexOf(query) != -1) {
+				result.push(wishes[i].text);
+			}
+		}
+		res.send({result: result});
+	})
+};
+
 function update_score_all () {
 	var wishes = app.WishModel.find();
 	for (var i = 0; i < wishes.length; i++) {
@@ -82,13 +97,11 @@ function add_voted (wish_id, req) {
 		req.session.voted = [];
 	} 
 	req.session.voted.push (wish_id);
-	console.log("add_voted: " + req.session.voted);
 };
 
 function remove_voted (wish_id, req) {
 	var index = req.session.voted.indexOf (wish_id);
 	req.session.voted.splice (index, 1);
-	console.log("remove_voted: " + req.session.voted);
 };
 
 /* Returns true if the session hasn't already voted on this wish, 
@@ -99,11 +112,9 @@ function has_voted (wish_id, req) {
 		/* Hasn't voted on anything yet */
 		return false;
 	} else if (req.session.voted.indexOf(wish_id) == -1) {
-		console.log("2");
 		/* Hasn't voted on this wish yet */
 		return false;
 	} else {
-		console.log("3");
 		/* Already voted on this wish */
 		return true;
 	}

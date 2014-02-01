@@ -19,11 +19,4 @@ exports.index = function(req, res){
 		}
 		res.render("index", {feed: feed});
 	});
-	// app.WishModel.find(function (err, wishes) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 		return;
-	// 	}
-	// 	res.render("index", {feed: wishes});
-	// });
 };

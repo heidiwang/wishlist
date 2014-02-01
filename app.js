@@ -6,6 +6,7 @@
  var express = require("express");
  var routes = require("./routes");
  var wish = require("./routes/wish");
+ var user = require("./routes/user");
  var http = require("http");
  var path = require("path");
 
@@ -72,4 +73,7 @@ function define_routes () {
 	app.post("/create_wish", wish.create);
 	app.get("/upvote/:id", wish.upvote);
 	app.get("/unvote/:id", wish.unvote);
+	app.get("/login_form", user.login_form);
+	app.get("/new_user", user.new_user);
+	app.get("/search/:query", wish.search);
 };

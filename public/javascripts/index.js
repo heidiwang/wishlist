@@ -21,3 +21,12 @@ $(".vote").click(function () {
 		});
 	}
 });
+
+$("#search").keypress(function () {
+	if ($(this).val()) {
+		$.getJSON("http://localhost:3000/search/" + $(this).val(), function (data) {
+			console.log(data.result);
+ 		  $("#results").text(data.result);
+	  });
+	}
+});
