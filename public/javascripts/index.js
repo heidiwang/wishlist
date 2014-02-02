@@ -1,5 +1,5 @@
 $(".vote").click(function () {
-	var div = $("#" + $(this).attr("id"));
+	var div = $(this);
 	if (div.attr("class") == "vote upvote") {
 		$.getJSON("http://localhost:3000/upvote/" + $(this).attr("id"), function (data) {
 			if (data.success) {
@@ -25,7 +25,17 @@ $("#search").keyup(function () {
 });
 
 $(".follow").click(function () {
-	$.get("/follow/" + $(this).attr("id"), function (data) {
-		/* Empty */
-	});
+	var div = $(this);
+	if (div.attr("class") == "follow") {
+		console.log(div);
+		$.get("/follow/" + div.attr("id"), function (data) {
+			div.attr("class", "follow unfollow");
+			div.text("unfollow");
+	  });
+	} else {
+		$.get("/unfollow/" + div.attr("id"), function (data) {
+			div.attr("class", "follow");
+			div.text("follow");
+		});
+	}
 });

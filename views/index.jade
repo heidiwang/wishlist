@@ -30,7 +30,11 @@ block content
 				div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
 
 			if user
-				div(id= feed_item.wish.id, class="follow") follow
+				if feed_item.following
+					div(id= feed_item.wish.id, class="follow unfollow") unfollow
+				else 
+					div(id= feed_item.wish.id, class="follow") follow
+
 
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 	script(type="text/javascript", src="../javascripts/index.js")

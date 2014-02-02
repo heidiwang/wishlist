@@ -89,4 +89,5 @@ function define_routes () {
 	app.get("/logout", user.logout);
 	app.get("/following", user.following);
 	app.get("/follow/:id", user.follow);
+	app.get("/unfollow/:id", user.unfollow);
 };
