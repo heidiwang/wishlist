@@ -3,7 +3,6 @@
 // });
 
 $(".vote").click(function () {
-	console.log("clicked");	
 	var div = $("#" + $(this).attr("id"));
 	if (div.attr("class") == "vote upvote") {
 		$.getJSON("http://localhost:3000/upvote/" + $(this).attr("id"), function (data) {

@@ -1,13 +1,18 @@
 extends layout
 
 block content
-	div
-		a(href="/login_form") Login
-		
+
+	if user
+		p Welcome #{user.name}
+		div
+			a(href="/logout") Logout
+	else 
+		div
+			a(href="/login_form") Login
+
 	p search
 		form(method="get", action="/search")
 			input(id="search", type="text", placeholder="Search", name="search")
-			input(type="submit", value="submit")
 		div(id="results")
 
 	p Welcome to wishlist

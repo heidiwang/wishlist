@@ -64,8 +64,16 @@ function define_schemas () {
 		score: Number
 	});
 
+	var user_schema = Schema({
+		name: {type: String, unique: true},
+		following: [Schema.Types.ObjectId] //Array of Wishes
+	});
+
 	var Wish = mongoose.model("Wish", wish_schema);
+	var User = mongoose.model("User", user_schema);
+
 	exports.WishModel = Wish;
+	exports.UserModel = User;
 };
 
 function define_routes () {
@@ -76,4 +84,7 @@ function define_routes () {
 	app.get("/login_form", user.login_form);
 	app.get("/new_user", user.new_user);
 	app.get("/search/:query", wish.search);
+	app.post("/login", user.login);
+	app.post("/create_user", user.create_user);
+	app.get("/logout", user.logout);
 };
