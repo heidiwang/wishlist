@@ -1,7 +1,3 @@
-// $(document).ready(function () {
-// 	console.log("Hello world");
-// });
-
 $(".vote").click(function () {
 	var div = $("#" + $(this).attr("id"));
 	if (div.attr("class") == "vote upvote") {
@@ -26,4 +22,10 @@ $("#search").keyup(function () {
 			console.log(data.result);
  		  $("#results").text(data.result);
 	  });
+});
+
+$(".follow").click(function () {
+	$.get("/follow/" + $(this).attr("id"), function (data) {
+		/* Empty */
+	});
 });

@@ -5,6 +5,8 @@ block content
 	if user
 		p Welcome #{user.name}
 		div
+			a(href="/following") Following
+		div
 			a(href="/logout") Logout
 	else 
 		div
@@ -26,6 +28,10 @@ block content
 				div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
 			else 
 				div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
+
+			if user
+				div(id= feed_item.wish.id, class="follow") follow
+
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 	script(type="text/javascript", src="../javascripts/index.js")
 

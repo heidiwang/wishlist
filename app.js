@@ -66,7 +66,7 @@ function define_schemas () {
 
 	var user_schema = Schema({
 		name: {type: String, unique: true},
-		following: [Schema.Types.ObjectId] //Array of Wishes
+		following: [{type: Schema.Types.ObjectId, ref: "Wish"}] //Array of Wishes
 	});
 
 	var Wish = mongoose.model("Wish", wish_schema);
@@ -87,4 +87,6 @@ function define_routes () {
 	app.post("/login", user.login);
 	app.post("/create_user", user.create_user);
 	app.get("/logout", user.logout);
+	app.get("/following", user.following);
+	app.get("/follow/:id", user.follow);
 };
