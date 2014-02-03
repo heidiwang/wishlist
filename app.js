@@ -66,7 +66,8 @@ function define_schemas () {
 
 	var user_schema = Schema({
 		name: {type: String, unique: true},
-		following: [{type: Schema.Types.ObjectId, ref: "Wish"}] //Array of Wishes
+		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
+		following: [{type: Schema.Types.ObjectId, ref: "Wish"}]
 	});
 
 	var Wish = mongoose.model("Wish", wish_schema);

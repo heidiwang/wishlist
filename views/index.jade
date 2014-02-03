@@ -22,18 +22,28 @@ block content
 		input(type="text", placeholder="What can technology do for you?", name="wish")
 		input(type="submit", value="submit")
 	ul
-		each feed_item in feed
-			li= feed_item.wish.text
-			if feed_item.voted
-				div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
-			else 
-				div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
+		if user
+			each feed_item in feed
+				li
+					div #{feed_item.wish.text}
+				//- if feed_item.voted
+				//- 	div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
+				//- else 
+				//- 	div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
+				if feed_item.voted
+					div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
+				else
+					div(id= feed_item.wish.id, class="vote") ^ #{feed_item.wish.upvotes}
 
-			if user
 				if feed_item.following
 					div(id= feed_item.wish.id, class="follow unfollow") unfollow
-				else 
+				else
 					div(id= feed_item.wish.id, class="follow") follow
+		else
+			each wish in wishes
+				li
+					div #{wish.text}
+					div #{wish.upvotes}
 
 
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")

@@ -35,9 +35,20 @@ exports.upvote = function (req, res) {
 				if (err) {
 					console.log(err);
 				} else {
-					add_voted (wish_id, req);
-					console.log(found_wish);
-					res.send({success: true, wish: found_wish});
+					app.UserModel.findById(req.session.user._id, function (err, found_user) {
+						if (err) {
+							console.log(err);
+						} else {
+							found_user.voted.push(found_wish);
+							found_user.save(function (err, found_user) {
+								if (err) {
+									console.log(err);
+								} else{
+									res.send({wish: found_wish});
+								}
+							});
+						}
+					});
 				}
 			});
 		}
@@ -56,9 +67,25 @@ exports.unvote = function (req, res) {
 				if (err) {
 					console.log(err);
 				} else {
-					remove_voted (wish_id, req);
-					console.log(found_wish);
-					res.send({success: true, wish: found_wish});
+					app.UserModel.findById(req.session.user._id, function (err, found_user) {
+						if (err) {
+							console.log(err);
+						} else {
+							var index = 0;
+							var voted = found_user.voted;
+							for (; index < voted.length; index++) {
+								if (found_wish._id.equals(voted[index])) break;
+							}
+							voted.splice(index, 1);
+							found_user.save(function (err, found_user) {
+								if (err) {
+									console.log(err);
+								} else {
+									res.send({wish: found_wish});
+								}
+							});
+						}
+					});
 				}
 			});
 		}
@@ -90,34 +117,3 @@ function update_score_all () {
 function update_score (wish) {
 	wish.score = Math.log(wish.upvotes + 1) + (wish.second_created - second_start) / DECAY_FACTOR;
 };
-
-
-function add_voted (wish_id, req) {
-	if (!req.session.voted) {
-		req.session.voted = [];
-	} 
-	req.session.voted.push (wish_id);
-};
-
-function remove_voted (wish_id, req) {
-	var index = req.session.voted.indexOf (wish_id);
-	req.session.voted.splice (index, 1);
-};
-
-/* Returns true if the session hasn't already voted on this wish, 
-false if they already have */
-
-function has_voted (wish_id, req) {
-	if (!req.session.voted) {
-		/* Hasn't voted on anything yet */
-		return false;
-	} else if (req.session.voted.indexOf(wish_id) == -1) {
-		/* Hasn't voted on this wish yet */
-		return false;
-	} else {
-		/* Already voted on this wish */
-		return true;
-	}
-};
-
-exports.has_voted = has_voted;
