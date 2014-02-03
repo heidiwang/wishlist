@@ -58,14 +58,14 @@ function define_schemas () {
 	var Schema = mongoose.Schema;
 
 	var wish_schema = Schema({
-		text: String,
+		text: {type: String, unique: true, required: true},
 		upvotes: Number,
 		second_created: Number,
 		score: Number
 	});
 
 	var user_schema = Schema({
-		user_name: {type: String},
+		user_name: {type: String, unique: true, required: true},
 		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
 		following: [{type: Schema.Types.ObjectId, ref: "Wish"}]
 	});
