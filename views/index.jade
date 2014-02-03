@@ -3,7 +3,7 @@ extends layout
 block content
 
 	if user
-		p Welcome #{user.name}
+		p Welcome #{user.user_name}
 		div
 			a(href="/following") Following
 		div
@@ -31,9 +31,9 @@ block content
 				//- else 
 				//- 	div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
 				if feed_item.voted
-					div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
+					div(id= feed_item.wish.id, class="vote") v #{feed_item.wish.upvotes}
 				else
-					div(id= feed_item.wish.id, class="vote") ^ #{feed_item.wish.upvotes}
+					div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
 
 				if feed_item.following
 					div(id= feed_item.wish.id, class="follow unfollow") unfollow

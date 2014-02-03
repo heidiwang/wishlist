@@ -65,7 +65,7 @@ function define_schemas () {
 	});
 
 	var user_schema = Schema({
-		name: {type: String, unique: true},
+		user_name: {type: String},
 		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
 		following: [{type: Schema.Types.ObjectId, ref: "Wish"}]
 	});

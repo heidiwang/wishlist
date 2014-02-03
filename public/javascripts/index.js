@@ -14,10 +14,14 @@ $(".vote").click(function () {
 });
 
 $("#search").keyup(function () {
-		$.getJSON("http://localhost:3000/search/" + $(this).val(), function (data) {
-			console.log(data.result);
+		if ($(this).val()) {
+			$.getJSON("http://localhost:3000/search/" + $(this).val(), function (data) {
+				console.log(data.result);
  		  $("#results").text(data.result);
-	  });
+	    });
+		} else {
+			$("#results").text("");
+		}
 });
 
 $(".follow").click(function () {
