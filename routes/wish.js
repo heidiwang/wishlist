@@ -23,6 +23,17 @@ exports.create = function (req, res) {
 	res.redirect("/");
 };
 
+exports.view = function (req, res) {
+	var wish_id = req.param("id");
+	app.WishModel.findById(wish_id, function (err, found_wish) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("wish", {wish: found_wish});
+		}
+	});
+};
+
 exports.upvote = function (req, res) {
 	var wish_id = req.param("id");
 	app.WishModel.findById(wish_id, function (err, found_wish) {

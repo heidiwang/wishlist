@@ -25,7 +25,7 @@ block content
 		if user
 			each feed_item in feed
 				li
-					div #{feed_item.wish.text}
+					a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
 				//- if feed_item.voted
 				//- 	div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
 				//- else 
@@ -42,7 +42,7 @@ block content
 		else
 			each wish in wishes
 				li
-					div #{wish.text}
+					a(href="/wish/" + wish._id) #{wish.text}
 					div #{wish.upvotes}
 
 
