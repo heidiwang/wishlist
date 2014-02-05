@@ -1,0 +1,8 @@
+extends layout
+
+block content
+
+  div
+    a(href="/") Home
+  each wish in wishes
+    a(href="/wish/" + wish._id) #{wish.text}
