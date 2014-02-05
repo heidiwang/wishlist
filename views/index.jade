@@ -26,10 +26,6 @@ block content
 			each feed_item in feed
 				li
 					a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
-				//- if feed_item.voted
-				//- 	div(id= feed_item.wish.id, class="vote unvote") v #{feed_item.wish.upvotes}
-				//- else 
-				//- 	div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
 				if feed_item.voted
 					div(id= feed_item.wish.id, class="vote") v #{feed_item.wish.upvotes}
 				else
