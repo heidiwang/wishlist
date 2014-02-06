@@ -3,7 +3,7 @@ extends layout
 block content
 
 	if user
-		p Welcome #{user.user_name}
+		h1 Welcome #{user.user_name}
 		div
 			a(href="/following") Following
 		div
@@ -17,12 +17,13 @@ block content
 			input(id="search", type="text", placeholder="Search", name="search")
 		div(id="results")
 
-	p Welcome to wishlist
-	form(id="post", method="post", action="/create_wish")
-		input(type="text", placeholder="What can technology do for you?", name="wish")
-		input(type="submit", value="submit")
+
 	ul
 		if user
+			p Welcome to wishlist
+				form(id="post", method="post", action="/create_wish")
+					input(type="text", placeholder="What can technology do for you?", name="wish")
+					input(type="submit", value="submit")
 			each feed_item in feed
 				li
 					a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
@@ -43,6 +44,4 @@ block content
 
 
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-	script(type="text/javascript", src="../javascripts/index.js")
-
-
+	script(type="text/javascript", src="../js/index.js")
