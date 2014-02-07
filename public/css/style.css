@@ -9,6 +9,10 @@ body {
 	border-radius: 10px;
 }
 
+.vote-btn {
+	margin-right: 10px;
+}
+
 /* a {
   color: #00B7FF;
 } */

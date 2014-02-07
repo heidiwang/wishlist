@@ -22,15 +22,16 @@ block content
 				div(class="row container", id="wish")
 					h4 #{feed_item.wish.text}
 					p
-						input(type="button", class="btn btn-default", value="Upvote")
-						|  #{feed_item.wish.upvotes} vote(s)
+						input(type="button", class="btn btn-default vote-btn", value="Vote")
+						span(class="glyphicon glyphicon-thumbs-up")
+						|  #{feed_item.wish.upvotes}
 				br
 		else
 			each wish in wishes
 				div(class="row container", id="wish")
 					h4 #{wish.text}
 					p
-						input(type="button", class="btn btn-default", value="Upvote")
+						input(type="button", class="btn btn-default vote-btn", value="Vote")
 						|  #{wish.upvotes} vote(s)
 				br
 
