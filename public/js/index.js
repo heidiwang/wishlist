@@ -27,17 +27,17 @@ $("#search").keyup(function () {
 });
 
 $(".follow").click(function () {
-	var div = $(this);
-	if (div.attr("class") == "follow") {
-		console.log(div);
-		$.get("/follow/" + div.attr("id"), function (data) {
-			div.attr("class", "follow unfollow");
-			div.text("unfollow");
+	var button = $(this);
+	if (button.attr("value") == "follow") {
+		console.log(button);
+		$.get("/follow/" + button.attr("id"), function (data) {
+			button.attr("value", "unfollow");
+			// button.text("unfollow");
 	  });
 	} else {
-		$.get("/unfollow/" + div.attr("id"), function (data) {
-			div.attr("class", "follow");
-			div.text("follow");
+		$.get("/unfollow/" + button.attr("id"), function (data) {
+			button.attr("value", "follow");
+			// button.text("follow");
 		});
 	}
 });

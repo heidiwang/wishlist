@@ -46,7 +46,7 @@ http.createServer(app).listen(app.get("port"), function(){
 });
 
 function init_mongoose () {
-	mongoose.connect("mongodb://localhost:27017/test");
+	mongoose.connect("mongodb://localhost/test");
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error:"));
 	db.once("open", function callback () {
