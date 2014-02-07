@@ -11,7 +11,12 @@ block content
 					a(class="btn btn-default", href="/following", role="button") Following 
 					a(class="btn btn-default", href="/logout", role="button") Logout
 			else
-				a(href="/login_form") Login
+				form(method="post", action="/login", class="form-signin", role="form")
+					h4(class="form-signin-heading") Login
+					input(type="text", class="form-control", placeholder="Name", name="name")
+					input(type="submit", class="btn btn-default", value="submit")
+				a(href="/new_user") New User
+
 			div(class="input-group")
 				input(type="text", class="form-control")
 				span(class="input-group-btn")
@@ -41,35 +46,35 @@ block content
 						|  #{wish.upvotes} vote(s)
 				br
 
-	p search
-		form(method="get", action="/search")
-			input(id="search", type="text", placeholder="Search", name="search")
-		div(id="results")
+	//- p search
+	//- 	form(method="get", action="/search")
+	//- 		input(id="search", type="text", placeholder="Search", name="search")
+	//- 	div(id="results")
 
 
-	ul
-		if user
-			p
-				form(id="post", method="post", action="/create_wish")
-					input(type="text", placeholder="What can technology do for you?", name="wish")
-					input(type="submit", value="submit")
-			each feed_item in feed
-				li
-					a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
-				if feed_item.voted
-					div(id= feed_item.wish.id, class="vote") v #{feed_item.wish.upvotes}
-				else
-					div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
+	//- ul
+	//- 	if user
+	//- 		p
+	//- 			form(id="post", method="post", action="/create_wish")
+	//- 				input(type="text", placeholder="What can technology do for you?", name="wish")
+	//- 				input(type="submit", value="submit")
+	//- 		each feed_item in feed
+	//- 			li
+	//- 				a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
+	//- 			if feed_item.voted
+	//- 				div(id= feed_item.wish.id, class="vote") v #{feed_item.wish.upvotes}
+	//- 			else
+	//- 				div(id= feed_item.wish.id, class="vote upvote") ^ #{feed_item.wish.upvotes}
 
-				if feed_item.following
-					div(id= feed_item.wish.id, class="follow unfollow") unfollow
-				else
-					div(id= feed_item.wish.id, class="follow") follow
-		else
-			each wish in wishes
-				li
-					a(href="/wish/" + wish._id) #{wish.text}
-					div #{wish.upvotes}
+	//- 			if feed_item.following
+	//- 				div(id= feed_item.wish.id, class="follow unfollow") unfollow
+	//- 			else
+	//- 				div(id= feed_item.wish.id, class="follow") follow
+	//- 	else
+	//- 		each wish in wishes
+	//- 			li
+	//- 				a(href="/wish/" + wish._id) #{wish.text}
+	//- 				div #{wish.upvotes}
 
 
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
