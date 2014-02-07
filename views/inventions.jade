@@ -1,6 +1,6 @@
-//- inventions.jade
-div
-	a(href="/") home
-	each invention in inventions
-    	a(href="/wish/" + wish._id) #{wish.text}
+extends layout
 
+block content
+	div(class="container")
+		h1 Inventions
+		p Coming soon!
