@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  div
-    a(href="/") Home
-    //- a(href="/inventions") inventions
-  each wish in wishes
-    a(href="/wish/" + wish._id) #{wish.text}
+	h2 What I'm Following
+	each wish in wishes
+		div(class="row container wish")
+			h4 #{wish.text}
+	br

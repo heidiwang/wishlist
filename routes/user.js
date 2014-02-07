@@ -52,7 +52,10 @@ exports.following = function (req, res) {
 	.findById(req.session.user._id)
 	.populate("following")
 	.exec(function (err, user) {
-		res.render("following", {wishes: user.following});
+		res.render("following", {
+			wishes: user.following,
+			user: req.session.user
+		});
 	});
 };
 

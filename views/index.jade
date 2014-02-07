@@ -23,8 +23,9 @@ block content
 		br
 		if user
 			each feed_item in feed
-				div(class="row container", id="wish")
-					h4 #{feed_item.wish.text}
+				div(class="row container wish")
+					a(href="/wish/" + feed_item.wish._id) 
+						h4 #{feed_item.wish.text}
 					p
 						if feed_item.voted
 							input(type="button", class="btn btn-default vote-btn vote", id= feed_item.wish.id, value="Unvote")
@@ -41,8 +42,9 @@ block content
 				br
 		else
 			each wish in wishes
-				div(class="row container", id="wish")
-					h4 #{wish.text}
+				div(class="row container wish")
+					a(href="/wish/" + wish._id) 
+						h4 #{wish.text}
 					p
 						input(type="button", class="btn btn-default vote-btn", value="Vote")
 						|  #{wish.upvotes} vote(s)
