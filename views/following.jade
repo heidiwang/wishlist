@@ -1,9 +1,10 @@
 extends layout
 
 block content
-	h2 What I'm Following
-	each wish in wishes
-		div(class="row container wish")
-			a(href="/wish/" + wish._id)
-				h4 #{wish.text}
-		br
+	.container
+		h2 What I'm Following
+		each wish in wishes
+			div(class="row container wish")
+				a(href="/wish/" + wish._id)
+					h4 #{wish.text}
+			br
