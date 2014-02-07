@@ -85,7 +85,9 @@ function define_schemas () {
 		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
 		following: [{type: Schema.Types.ObjectId, ref: "Wish"}]
 	});
-
+	
+	var Story = mongoose.model("Story", story_schema);
+	var Invention = mongoose.model("Invention", invention_schema);
 	var Wish = mongoose.model("Wish", wish_schema);
 	var User = mongoose.model("User", user_schema);
 

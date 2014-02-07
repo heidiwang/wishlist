@@ -34,7 +34,10 @@ block content
 							input(type="button", class="btn btn-default vote-btn vote upvote", id= feed_item.wish.id, value="Vote")
 							span(class="glyphicon glyphicon-thumbs-up") 
 								span #{feed_item.wish.upvotes}
-						
+						if feed_item.following
+							input(type="button", class="btn btn-default follow unfollow", id=feed_item.wish.id, value="unfollow")
+						else
+							input(type="button", class="btn btn-default follow", id=feed_item.wish.id, value="follow")
 				br
 		else
 			each wish in wishes
@@ -65,9 +68,7 @@ block content
 	//- ul
 	//- 	if user
 	//- 		p
-	//- 			form(id="post", method="post", action="/create_wish")
-	//- 				input(type="text", placeholder="What can technology do for you?", name="wish")
-	//- 				input(type="submit", value="submit")
+	//- 			
 	//- 		each feed_item in feed
 	//- 			li
 	//- 				a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
@@ -88,6 +89,3 @@ block content
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
 	script(type="text/javascript", src="js/bootstrap.min.js")
 	script(type="text/javascript", src="js/index.js")
-	script(type="text/javascript", src="../javascripts/index.js")
-	script(type="text/javascript", src="../javascripts/index.js")
-	script(type="text/javascript", src="../javascripts/index.js")
