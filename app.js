@@ -46,7 +46,7 @@ http.createServer(app).listen(app.get("port"), function(){
 });
 
 function init_mongoose () {
-	mongoose.connect("mongodb://10.31.12.51/test");
+	mongoose.connect("mongodb://localhost:27017/test");
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error:"));
 	db.once("open", function callback () {
@@ -83,7 +83,9 @@ function define_schemas () {
 		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
 		following: [{type: Schema.Types.ObjectId, ref: "Wish"}]
 	});
-
+	
+	var Story = mongoose.model("Story", story_schema);
+	var Invention = mongoose.model("Invention", invention_schema);
 	var Wish = mongoose.model("Wish", wish_schema);
 	var User = mongoose.model("User", user_schema);
 
