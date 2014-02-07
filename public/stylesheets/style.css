@@ -1,18 +1,8 @@
 body {
-  padding-bottom: 70px;
-  /* padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-#wish {
-	background-color: #C0C0C0;
-	border-radius: 10px;
-}
-
-.vote-btn {
-	margin-right: 10px;
-}
-
-/* a {
+a {
   color: #00B7FF;
-} */
+}
