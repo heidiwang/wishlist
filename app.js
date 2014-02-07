@@ -46,7 +46,7 @@ http.createServer(app).listen(app.get("port"), function(){
 });
 
 function init_mongoose () {
-	mongoose.connect("mongodb://localhost/test");
+	mongoose.connect("mongodb://10.31.12.51/test");
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error:"));
 	db.once("open", function callback () {
@@ -56,12 +56,26 @@ function init_mongoose () {
 
 function define_schemas () {
 	var Schema = mongoose.Schema;
+	
+	var story_schema = Schema({
+		text: {type: String, unique: true, required: true},
+		upvotes: Number,
+		second_created: Number
+	});
+
+	var invention_schema = Schema({
+		title: {type: String, unique: true, required: true},
+		description: {type: String, unique: true, required: true},
+		upvotes: Number,
+	});
 
 	var wish_schema = Schema({
 		text: {type: String, unique: true, required: true},
 		upvotes: Number,
 		second_created: Number,
-		score: Number
+		score: Number,
+		inventions: [{type: Schema.Types.ObjectId, ref: "Invention"}],
+		stories: [{type: Schema.Types.ObjectId, ref: "Story"}]
 	});
 
 	var user_schema = Schema({

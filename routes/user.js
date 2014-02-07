@@ -9,23 +9,6 @@ exports.new_user = function (req, res) {
 	res.render("new_user");
 };
 
-exports.login = function (req, res) {
-	var name = req.param("name");
-
-	app.UserModel.findOne({user_name: name}, function (err, found_user) {
-		if (err) {
-			console.log(err);
-		} else if (!found_user) {
-			console.log("login: !found_user");
-			res.redirect("/login_form");
-		} else {
-			req.session.user = found_user;
-			res.redirect("/");
-		}
-	});
-
-};
-
 exports.create_user = function (req, res) {
 	var name = req.param("name");
 	var new_user = new app.UserModel({user_name: name});
@@ -41,10 +24,28 @@ exports.create_user = function (req, res) {
 	});
 };
 
+exports.login = function (req, res) {
+	var name = req.param("name");
+
+	app.UserModel.findOne({user_name: name}, function (err, found_user) {
+		if (err) {
+			console.log(err);
+		} else if (!found_user) {
+			console.log("login: !found_user");
+			res.redirect("/login_form");
+		} else {
+			req.session.user = found_user;
+			res.redirect("/");
+		}
+	});
+};
+
 exports.logout = function (req, res) {
 	req.session.user = null;
 	res.redirect("/");
 };
+
+
 
 exports.following = function (req, res) {
 	app.UserModel
@@ -90,4 +91,4 @@ exports.unfollow = function (req, res) {
 			});
 		}
 	});
-}
+};

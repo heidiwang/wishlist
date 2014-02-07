@@ -1,0 +1,6 @@
+//- inventions.jade
+div
+	a(href="/") home
+	each invention in inventions
+    	a(href="/wish/" + wish._id) #{wish.text}
+
