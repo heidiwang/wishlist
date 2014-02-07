@@ -108,15 +108,14 @@ exports.unvote = function (req, res) {
 
 exports.search = function (req, res) {
 	var query = req.param("query");
-	console.log(query);
 	app.WishModel.find(function (err, wishes) {
 		var result = [];
 		for (var i = 0; i < wishes.length; i++) {
-			console.log(wishes[i].text);
 			if (wishes[i].text.indexOf(query) != -1) {
 				result.push(wishes[i].text);
 			}
 		}
+		console.log(result);
 		res.send({result: result});
 	})
 };
