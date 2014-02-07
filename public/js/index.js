@@ -1,14 +1,16 @@
 $(".vote").click(function () {
-	var div = $(this);
-	if (div.attr("class") == "vote upvote") {
-		$.getJSON("http://localhost:3000/upvote/" + $(this).attr("id"), function (data) {
-			div.attr("class", "vote unvote");
-			div.text("v " + data.wish.upvotes);
+	var input = $(this);
+	if (input.attr("class") == "btn btn-default vote-btn vote upvote") {
+		$.getJSON("http://localhost:3000/upvote/" + input.attr("id"), function (data) {
+			input.attr("class", "btn btn-default vote-btn vote unvote");
+			input.attr("value", "Unvote");
+			input.next().text(data.wish.upvotes);
 		});
 	} else {
-		$.getJSON("http://localhost:3000/unvote/" + $(this).attr("id"), function (data) {
-			div.attr("class", "vote upvote");
-			div.text("^ " + data.wish.upvotes);
+		$.getJSON("http://localhost:3000/unvote/" + input.attr("id"), function (data) {
+			input.attr("class", "btn btn-default vote-btn vote upvote");
+			input.attr("value", "Vote")
+			input.next().text(data.wish.upvotes);
 		});
 	}
 });

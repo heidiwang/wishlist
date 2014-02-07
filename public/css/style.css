@@ -13,6 +13,10 @@ body {
 	margin-right: 10px;
 }
 
+.glyphicon-thumbs-up span {
+	padding-left: 5px;
+}
+
 /* a {
   color: #00B7FF;
 } */
