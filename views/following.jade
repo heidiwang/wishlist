@@ -4,5 +4,6 @@ block content
 	h2 What I'm Following
 	each wish in wishes
 		div(class="row container wish")
-			h4 #{wish.text}
-	br
+			a(href="/wish/" + wish._id)
+				h4 #{wish.text}
+		br

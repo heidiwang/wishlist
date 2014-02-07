@@ -29,7 +29,10 @@ exports.view = function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("wish", {wish: found_wish});
+			res.render("wish", {
+				wish: found_wish,
+				user: req.session.user
+			});
 		}
 	});
 };
