@@ -7,6 +7,8 @@
  var routes = require("./routes");
  var wish = require("./routes/wish");
  var user = require("./routes/user");
+ var stories = require("./routes/stories");
+ var inventions = require("./routes/inventions");
  var http = require("http");
  var path = require("path");
 
@@ -108,4 +110,6 @@ function define_routes () {
 	app.get("/follow/:id", user.follow);
 	app.get("/unfollow/:id", user.unfollow);
 	app.get("/wish/:id", wish.view);
+	app.get("/stories", stories.view);
+	app.get("/inventions", inventions.view);
 };
