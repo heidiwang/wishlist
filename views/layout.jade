@@ -1,8 +1,29 @@
 doctype html
 html
 	head
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		title= title
-		link(rel='stylesheet', href='/css/style.css')
-		link(rel='stylesheet', href='css/bootstrap/bootstrap.min.css')
+
+		link(rel="stylesheet", href="css/bootstrap.min.css")
+		link(rel="stylesheet", href="css/style.css")
 	body
 		block content
+
+		nav(class="navbar navbar-default navbar-fixed-bottom", role="navigation")
+			div(class="container-fluid")
+				div(class="navbar-header")
+					button(type="button", class="navbar-toggle", data-toggle="collapse", data-target="#main-navbar")
+						span(class="sr-only") Toggle navigation
+						span(class="icon-bar")
+						span(class="icon-bar")
+						span(class="icon-bar")
+					a(class="navbar-brand", href="/") Wishlist
+
+				div(class="collaspse navbar-collapse", id="#main-navbar")
+					ul(class="nav navbar-nav")
+						li(class="active")
+							a(href="#") Needs
+						li
+							a(href="#") Stories
+						li
+							a(href="#") Inventions
