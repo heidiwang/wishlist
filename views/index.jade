@@ -1,8 +1,6 @@
 extends layout
 
 block content
-
-<<<<<<< HEAD
 	div(class="container")
 		div(class="row")
 			h1 Wishlist
@@ -35,7 +33,6 @@ block content
 						input(type="button", class="btn btn-default vote-btn", value="Vote")
 						|  #{wish.upvotes} vote(s)
 				br
-=======
 	if user
 		p Welcome #{user.user_name}
 		div
@@ -45,8 +42,6 @@ block content
 	else 
 		div
 			a(href="/login_form") Login
->>>>>>> parent of 5e55f74... Changed folder names
-
 	p search
 		form(method="get", action="/search")
 			input(id="search", type="text", placeholder="Search", name="search")
@@ -58,19 +53,10 @@ block content
 		input(type="submit", value="submit")
 	ul
 		if user
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 			p
 				form(id="post", method="post", action="/create_wish")
 					input(type="text", placeholder="What can technology do for you?", name="wish")
 					input(type="submit", value="submit")
-=======
->>>>>>> parent of 5e55f74... Changed folder names
-=======
->>>>>>> parent of 5e55f74... Changed folder names
-=======
->>>>>>> parent of 5e55f74... Changed folder names
 			each feed_item in feed
 				li
 					a(href="/wish/" + feed_item.wish._id) #{feed_item.wish.text}
@@ -88,26 +74,9 @@ block content
 				li
 					a(href="/wish/" + wish._id) #{wish.text}
 					div #{wish.upvotes}
-
-
 	script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 	script(type="text/javascript", src="js/bootstrap.min.js")
 	script(type="text/javascript", src="js/index.js")
-=======
 	script(type="text/javascript", src="../javascripts/index.js")
-
-
->>>>>>> parent of 5e55f74... Changed folder names
-=======
 	script(type="text/javascript", src="../javascripts/index.js")
-
-
->>>>>>> parent of 5e55f74... Changed folder names
-=======
 	script(type="text/javascript", src="../javascripts/index.js")
-
-
->>>>>>> parent of 5e55f74... Changed folder names
